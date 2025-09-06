@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyrus Data Hub</title>
+    <link rel="icon" type="image/png" href="4442eed966cc9b0149ad7e542bde0b4e.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <body>
+        <div class="container">
+          <h1>Cyrus Data Hub</h1>
+          <div class="grid">
+            <!-- MTN -->
+            <div class="card">
+              <h2 style="color:#facc15;">MTN Bundles</h2>
+              <div class="bundle"><size>1GB</size><price>GHS 6</price><button onclick="openModal('MTN','1GB',6)">Buy</button></div>
+              <div class="bundle"><size>2GB</size><price>GHS 12</price><button onclick="openModal('MTN','2GB',12)">Buy</button></div>
+              <div class="bundle"><size>3GB</size><price>GHS 18</price><button onclick="openModal('MTN','3GB',18)">Buy</button></div>
+              <div class="bundle"><size>4GB</size><price>GHS 24</price><button onclick="openModal('MTN','4GB',24)">Buy</button></div>
+              <div class="bundle"><size>5GB</size><price>GHS 30</price><button onclick="openModal('MTN','5GB',30)">Buy</button></div>
+            </div>
+            <!-- Vodafone -->
+            <div class="card">
+              <h2 style="color:#dc2626;">Vodafone Bundles</h2>
+              <div class="bundle"><size>1GB</size><price>GHS 10</price><button onclick="openModal('Vodafone','1GB',10)">Buy</button></div>
+              <div class="bundle"><size>2GB</size><price>GHS 20</price><button onclick="openModal('Vodafone','2GB',20)">Buy</button></div>
+              <div class="bundle"><size>3GB</size><price>GHS 30</price><button onclick="openModal('Vodafone','3GB',30)">Buy</button></div>
+              <div class="bundle"><size>4GB</size><price>GHS 40</price><button onclick="openModal('Vodafone','4GB',40)">Buy</button></div>
+              <div class="bundle"><size>5GB</size><price>GHS 50</price><button onclick="openModal('Vodafone','5GB',50)">Buy</button></div>
+            </div>
+          </div>
+        </div>
+        <!-- Modal -->
+        <div id="paymentModal" class="modal">
+          <div class="modal-content">
+            <h3 id="bundleTitle">Confirm Payment</h3>
+            <p>Send payment to: <b id="momoNumber">0502376541</b></p>
+            <p id="instructions"></p>
+            <label>Transaction ID:</label>
+            <input type="text" id="transactionId" placeholder="Enter MoMo Transaction ID" />
+            <div class="actions">
+              <button onclick="closeModal()">Cancel</button>
+              <button onclick="copyNumber()">Copy Number</button>
+              <button onclick="submitPayment()">Submit</button>
+            </div>
+          </div>
+        </div>
+        <a href="https://wa.me/233502376541" target="_blank"
+   style="position:fixed; bottom:20px; right:20px; background:#25d366; color:white; padding:12px 16px; border-radius:24px; font-size:24px; text-decoration:none; box-shadow:0 4px 6px rgba(0,0,0,0.3);">
+  💬 Customer service
+</a>
+        <script src="app.js"></script>
+</body>
+</html>
