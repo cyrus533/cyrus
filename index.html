@@ -4,21 +4,38 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cyrus Data Hub</title>
+
+  <!-- Link to external CSS -->
   <link rel="stylesheet" href="style.css">
-  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+  <!-- EmailJS -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+  <script type="text/javascript">
+    (function() {
+      emailjs.init("k7Y1IyxlSt1I2i_Ii"); // Your Public Key
+    })();
+  </script>
 </head>
 <body>
   <div class="container">
     <h1>Cyrus Data Hub</h1>
+
+    <!-- Payment Instructions -->
+    <div class="payment-info">
+      <p>📌 Please send payment to <strong>0502376541</strong></p>
+      <p>👉 If you are using <strong>MTN</strong>, select <strong>Telecel</strong> under other networks.</p>
+    </div>
+
+    <!-- Order Form -->
     <form id="orderForm">
       <label>Beneficiary Number</label>
-      <input type="text" name="beneficiary_number" placeholder="Enter number to receive data" required>
+      <input type="text" name="beneficiary_number" placeholder="Number to receive data" required>
 
-      <label>Your Phone Number (for payment confirmation)</label>
-      <input type="text" name="phone" placeholder="Enter your phone number" required>
+      <label>Your Phone Number</label>
+      <input type="text" name="phone" placeholder="Your phone number" required>
 
       <label>Bundle Size</label>
-      <select name="bundle">
+      <select name="bundle" required>
         <option value="1GB - GHS 6">1GB - GHS 6</option>
         <option value="3GB - GHS 12">3GB - GHS 12</option>
         <option value="6GB - GHS 22">6GB - GHS 22</option>
@@ -35,18 +52,16 @@
   </div>
 
   <script>
-    (function() {
-      emailjs.init("k7Y1IyxlSt1I2i_Ii"); // Your Public Key
-    })();
-
-    document.getElementById("orderForm").addEventListener("submit", function(event) {
-      event.preventDefault();
+    // Form submission
+    document.getElementById("orderForm").addEventListener("submit", function(e) {
+      e.preventDefault();
 
       emailjs.sendForm("service_hc2vxxp", "template_5hl2jaf", this)
-        .then(function() {
-          alert("✅ Order sent successfully!\n\n📌 Please send payment to 0502376541.\n👉 If you are using MTN, select *Telecel* under other networks.");
-        }, function(error) {
-          alert("❌ Failed to send order. Please try again.\nError: " + JSON.stringify(error));
+        .then(() => {
+          alert("✅ Order sent successfully!\n\n📌 Please send payment to 0502376541.\n👉 If you are using MTN, select Telecel under other networks.");
+        }, (error) => {
+          alert("❌ Failed to send order. Please try again.");
+          console.error(error);
         });
     });
   </script>
