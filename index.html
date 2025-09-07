@@ -1,108 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cyrus Data Hub</title>
-    <link rel="icon" type="image/png" href="4442eed966cc9b0149ad7e542bde0b4e.png">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cyrus Data Hub</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <body>
-        <div class="container">
-          <h1>Cyrus Data Hub</h1>
-          <div class="grid">
-            <!-- MTN -->
-            <div class="card">
-              <h2 style="color:#facc15;">MTN Bundles</h2>
-              <div class="bundle"><size>1GB</size><price>GHS 6</price><button onclick="openModal('MTN','1GB',6)">Buy</button></div>
-              <div class="bundle"><size>2GB</size><price>GHS 12</price><button onclick="openModal('MTN','2GB',12)">Buy</button></div>
-              <div class="bundle"><size>3GB</size><price>GHS 18</price><button onclick="openModal('MTN','3GB',18)">Buy</button></div>
-              <div class="bundle"><size>4GB</size><price>GHS 24</price><button onclick="openModal('MTN','4GB',24)">Buy</button></div>
-              <div class="bundle"><size>5GB</size><price>GHS 30</price><button onclick="openModal('MTN','5GB',30)">Buy</button></div>
-            </div>
-            <!-- Vodafone -->
-            <div class="card">
-              <h2 style="color:#dc2626;">Vodafone Bundles</h2>
-              <div class="bundle"><size>1GB</size><price>GHS 10</price><button onclick="openModal('Vodafone','1GB',10)">Buy</button></div>
-              <div class="bundle"><size>2GB</size><price>GHS 20</price><button onclick="openModal('Vodafone','2GB',20)">Buy</button></div>
-              <div class="bundle"><size>3GB</size><price>GHS 30</price><button onclick="openModal('Vodafone','3GB',30)">Buy</button></div>
-              <div class="bundle"><size>4GB</size><price>GHS 40</price><button onclick="openModal('Vodafone','4GB',40)">Buy</button></div>
-              <div class="bundle"><size>5GB</size><price>GHS 50</price><button onclick="openModal('Vodafone','5GB',50)">Buy</button></div>
-            </div>
-          </div>
-        </div>
-        <!-- Modal -->
-        <div id="paymentModal" class="modal">
-          <div class="modal-content">
-            <h3 id="bundleTitle">Confirm Payment</h3>
-            <p>Send payment to: <b id="momoNumber">0502376541</b></p>
-            <p id="instructions"></p>
-            <label>Transaction ID:</label>
-            <input type="text" id="transactionId" placeholder="Enter MoMo Transaction ID" />
-            <div class="actions">
-              <button onclick="closeModal()">Cancel</button>
-              <button onclick="copyNumber()">Copy Number</button>
-              <button onclick="submitPayment()">Submit</button>
-            </div>
-          </div>
-        </div>
-        <a href="https://wa.me/233502376541" target="_blank"
-   style="position:fixed; bottom:20px; right:20px; background:#25d366; color:white; padding:12px 16px; border-radius:24px; font-size:24px; text-decoration:none; box-shadow:0 4px 6px rgba(0,0,0,0.3);">
-  💬 Customer service
-</a>
-        <script src="app.js"></script>
-</body><body>
-  <h1>Cyrus Data Hub</h1>
-  <p>Order your MTN or Vodafone data bundles instantly 🚀</p>
+  <div class="container">
+    <h1>Cyrus Data Hub</h1>
 
-  <form id="orderForm">
-    <label>Phone Number</label>
-    <input type="text" name="phone" required>
+    <!-- MTN Bundles -->
+    <div class="card">
+      <h2>MTN Bundles</h2>
+      <div class="bundle">1GB - GHS 6</div>
+      <div class="bundle">2GB - GHS 10</div>
+      <div class="bundle">5GB - GHS 20</div>
+    </div>
 
-    <label>Bundle Size</label>
-    <select name="bundle" required>
-      <option value="1GB - GHS 6">1GB - GHS 6</option>
-      <option value="2GB - GHS 12">2GB - GHS 12</option>
-      <option value="3GB - GHS 18">3GB - GHS 18</option>
-      <option value="4GB - GHS 24">4GB - GHS 24</option>
-      <option value="5GB - GHS 30">5GB - GHS 30</option>
-    </select>
+    <!-- Vodafone Bundles -->
+    <div class="card">
+      <h2>Vodafone Bundles</h2>
+      <div class="bundle">1.5GB - GHS 7</div>
+      <div class="bundle">3GB - GHS 12</div>
+      <div class="bundle">6GB - GHS 22</div>
+    </div>
 
-    <label>Amount</label>
-    <input type="text" name="amount" required>
+    <!-- Order Form -->
+    <form id="orderForm">
+      <label for="phone"><b>Phone Number</b></label>
+      <input type="text" id="phone" name="phone" placeholder="Enter phone number" required>
 
-    <label>Email Address</label>
-    <input type="email" name="customer_email" required>
+      <label for="bundle"><b>Bundle Size</b></label>
+      <select id="bundle" name="bundle" required>
+        <option value="1GB - GHS 6">1GB - GHS 6</option>
+        <option value="2GB - GHS 10">2GB - GHS 10</option>
+        <option value="5GB - GHS 20">5GB - GHS 20</option>
+        <option value="1.5GB - GHS 7">1.5GB - GHS 7</option>
+        <option value="3GB - GHS 12">3GB - GHS 12</option>
+        <option value="6GB - GHS 22">6GB - GHS 22</option>
+      </select>
 
-    <button type="submit">Submit Order</button>
-  </form>
+      <label for="amount"><b>Amount</b></label>
+      <input type="text" id="amount" name="amount" readonly>
 
-  <!-- EmailJS SDK -->
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+      <label for="email"><b>Email Address (Optional)</b></label>
+      <input type="email" id="email" name="email" placeholder="Enter email (optional)">
+
+      <button type="submit">Submit Order</button>
+    </form>
+  </div>
+
+  <!-- Customer Service Floating Button -->
+  <a href="https://wa.me/233XXXXXXXXX" class="customer-service">💬 Customer Service</a>
+
+  <!-- EmailJS Script -->
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
   <script>
     (function(){
-      emailjs.init("k7Y1IyxlSt1I2i_Ii"); // ✅ Your Public Key
+      emailjs.init("k7Y1IyxlSt1I2i_Ii"); // your public key
     })();
 
-    document.getElementById('orderForm').addEventListener('submit', function(event) {
-      event.preventDefault();
+    document.getElementById("orderForm").addEventListener("submit", function(e){
+      e.preventDefault();
 
-      // 1️⃣ Send to Admin (you)
-      emailjs.sendForm('service_hc2vxxp', 'template_5hl2jaf', this)
-        .then(function() {
-          console.log("✅ Order sent to admin");
-        }, function(error) {
-          console.log("❌ Admin email failed:", error);
-        });
+      emailjs.send("service_hc2vxxp", "template_b59wz7p", {
+        phone: document.getElementById("phone").value,
+        bundle: document.getElementById("bundle").value,
+        amount: document.getElementById("amount").value,
+        email: document.getElementById("email").value || "No email provided"
+      }).then(function() {
+        alert("✅ Order submitted successfully!");
+      }, function(error) {
+        alert("❌ Failed to send order. Please try again.");
+        console.log(error);
+      });
+    });
 
-      // 2️⃣ Send Auto-Reply to Customer
-      emailjs.sendForm('service_hc2vxxp', 'template_b59wz7p', this)
-        .then(function() {
-          alert("✅ Order submitted! A confirmation email has been sent.");
-        }, function(error) {
-          alert("❌ Auto-reply failed: " + JSON.stringify(error));
-        });
+    // Auto fill amount based on bundle
+    document.getElementById("bundle").addEventListener("change", function(){
+      document.getElementById("amount").value = this.value.split(" - ")[1];
     });
   </script>
 </body>
