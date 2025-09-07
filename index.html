@@ -52,5 +52,58 @@
   💬 Customer service
 </a>
         <script src="app.js"></script>
+</body><body>
+  <h1>Cyrus Data Hub</h1>
+  <p>Order your MTN or Vodafone data bundles instantly 🚀</p>
+
+  <form id="orderForm">
+    <label>Phone Number</label>
+    <input type="text" name="phone" required>
+
+    <label>Bundle Size</label>
+    <select name="bundle" required>
+      <option value="1GB - GHS 6">1GB - GHS 6</option>
+      <option value="2GB - GHS 12">2GB - GHS 12</option>
+      <option value="3GB - GHS 18">3GB - GHS 18</option>
+      <option value="4GB - GHS 24">4GB - GHS 24</option>
+      <option value="5GB - GHS 30">5GB - GHS 30</option>
+    </select>
+
+    <label>Amount</label>
+    <input type="text" name="amount" required>
+
+    <label>Email Address</label>
+    <input type="email" name="customer_email" required>
+
+    <button type="submit">Submit Order</button>
+  </form>
+
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script>
+    (function(){
+      emailjs.init("k7Y1IyxlSt1I2i_Ii"); // ✅ Your Public Key
+    })();
+
+    document.getElementById('orderForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      // 1️⃣ Send to Admin (you)
+      emailjs.sendForm('service_hc2vxxp', 'template_5hl2jaf', this)
+        .then(function() {
+          console.log("✅ Order sent to admin");
+        }, function(error) {
+          console.log("❌ Admin email failed:", error);
+        });
+
+      // 2️⃣ Send Auto-Reply to Customer
+      emailjs.sendForm('service_hc2vxxp', 'template_b59wz7p', this)
+        .then(function() {
+          alert("✅ Order submitted! A confirmation email has been sent.");
+        }, function(error) {
+          alert("❌ Auto-reply failed: " + JSON.stringify(error));
+        });
+    });
+  </script>
 </body>
 </html>
