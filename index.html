@@ -10,27 +10,12 @@
 <body>
   <div class="container">
     <h1>Cyrus Data Hub</h1>
-
-    <!-- MTN Bundles -->
-    <div class="card">
-      <h2 style="color:#ffcc00">MTN Bundles</h2>
-      <p>1GB - GHS 6</p>
-      <p>3GB - GHS 12</p>
-      <p>6GB - GHS 22</p>
-    </div>
-
-    <!-- Vodafone Bundles -->
-    <div class="card">
-      <h2 style="color:#e60000">Vodafone Bundles</h2>
-      <p>1.5GB - GHS 7</p>
-      <p>3GB - GHS 12</p>
-      <p>6GB - GHS 22</p>
-    </div>
-
-    <!-- Order Form -->
     <form id="orderForm">
-      <label>Phone Number</label>
-      <input type="text" name="phone" placeholder="Enter phone number" required>
+      <label>Beneficiary Number</label>
+      <input type="text" name="beneficiary_number" placeholder="Enter number to receive data" required>
+
+      <label>Your Phone Number (for payment confirmation)</label>
+      <input type="text" name="phone" placeholder="Enter your phone number" required>
 
       <label>Bundle Size</label>
       <select name="bundle">
@@ -51,15 +36,15 @@
 
   <script>
     (function() {
-      emailjs.init("k7Y1IyxlSt1I2i_Ii"); // your Public Key
+      emailjs.init("k7Y1IyxlSt1I2i_Ii"); // Your Public Key
     })();
 
     document.getElementById("orderForm").addEventListener("submit", function(event) {
       event.preventDefault();
 
-      emailjs.sendForm("service_hc2vxxp", "template_b59wz7p", this)
+      emailjs.sendForm("service_hc2vxxp", "template_5hl2jaf", this)
         .then(function() {
-          alert("✅ Order sent successfully!");
+          alert("✅ Order sent successfully!\n\n📌 Please send payment to 0502376541.\n👉 If you are using MTN, select *Telecel* under other networks.");
         }, function(error) {
           alert("❌ Failed to send order. Please try again.\nError: " + JSON.stringify(error));
         });
