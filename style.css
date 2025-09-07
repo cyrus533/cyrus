@@ -1,125 +1,107 @@
+/* General styles */
 body {
-  margin: 0;
   font-family: Arial, sans-serif;
-  background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);
-  
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  margin: 0;
+  padding: 0;
+  color: #fff;
 }
+
+/* Container */
 .container {
-  max-width: 900px;
-  margin: 40px auto;
+  max-width: 500px;
+  margin: 0 auto;
   padding: 20px;
-}
-h1 {
   text-align: center;
-  font-size: 28px;
+}
+
+/* Titles */
+h1 {
+  font-size: 26px;
   margin-bottom: 20px;
 }
-.grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
+
+h2 {
+  font-size: 20px;
+  margin: 15px 0;
+  color: #ffd700;
 }
+
+/* Cards for bundles */
 .card {
-  background: #fff;
-  padding: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 15px;
   border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
-.card h2 {
-  margin-top: 0;
-}
+
 .bundle {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #eee;
-  padding: 8px 0;
+  font-size: 16px;
+  margin: 8px 0;
+  font-weight: bold;
 }
-button {
-  background: #2563eb;
-  color: white;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 6px;
-  cursor: pointer;
-}
-button:hover {
-  background: #1d4ed8;
-}
-/* Modal */
-.modal {
-  display: none;
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.5);
-  justify-content: center;
-  align-items: center;
-}
-.modal-content {
-  background: white;
+
+/* Form styling */
+form {
+  background: rgba(255, 255, 255, 0.15);
   padding: 20px;
   border-radius: 12px;
-  width: 90%;
-  max-width: 400px;
+  text-align: left;
+  margin-bottom: 100px; /* extra space so Customer Service doesn’t block */
 }
-.modal-content h3 {
-  margin-top: 0;
+
+label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 6px;
 }
-.actions {
-  margin-top: 20px;
-  display: flex;
-  justify-content: space-between;
-}
-input {
+
+input, select {
+  padding: 12px;
+  margin-bottom: 18px;
+  font-size: 16px;
   width: 100%;
-  padding: 8px;
-  margin-top: 8px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  border: none;
+  border-radius: 8px;
+  box-sizing: border-box;
 }
-.cyrus{
-  display: flex;
-     flex-direction:column;
-     gap:20px;
-     max-width: 600px;
-     margin: 0 auto;
+
+/* Submit button */
+button[type="submit"] {
+  width: 100%;
+  padding: 14px;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease;
 }
-.card{
-    background: #fff;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.9);
+
+button[type="submit"]:hover {
+  background: #0056b3;
 }
-.card .bundle{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 10px 0;
-  padding: 6px 0;
+
+/* Floating Customer Service button */
+.customer-service {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #25d366;
+  color: white;
+  padding: 14px 18px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  transition: 0.3s ease;
 }
-.card .bundle-text{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+
+.customer-service:hover {
+  background: #1da851;
 }
-.card .bundle-text.size{
-    font-weight: bold;
-    font-size: 16px;
-}
-.card .bundle-text .price {
-    font-size: 14px;
-    color: #333;
-    margin-top: 2px;
-  }
-  .card .bundle button {
-    background: #007bff;
-    border: none;
-    color: white;
-    padding: 6px 12px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 14px;
-  }
-  .bundle button:hover {
-    background: #051e3a;
-  }
+
