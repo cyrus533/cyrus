@@ -2,38 +2,66 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Data Bundle Prices</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Cyrus Data Hub</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>📶 Cyrus Data Hub</h1>
 
-  <!-- MTN Section -->
-  <div class="network-section mtn">
-     <img src="images/images.jpeg" alt="MTN Logo" width="120">
-    <h2>MTN Data Bundles</h2>
-    <table>
-      <tr><th>Bundle</th><th>Price (₵)</th></tr>
-      <tr><td>1GB</td><td>6</td></tr>
-      <tr><td>2GB</td><td>12</td></tr>
-      <tr><td>3GB</td><td>15</td></tr>
-      <tr><td>4GB</td><td>22</td></tr>
-      <tr><td>5GB</td><td>27</td></tr>
-    </table>
+  <h2>Buy Data Bundle</h2>
+
+  <form id="bundleForm">
+    <select id="bundle" required>
+      <option value="">-- Choose a bundle --</option>
+      <option value="6|MTN 1GB">MTN 1GB → ₵6</option>
+      <option value="12|MTN 2GB">MTN 2GB → ₵12</option>
+      <option value="15|MTN 3GB">MTN 3GB → ₵15</option>
+      <option value="22|MTN 4GB">MTN 4GB → ₵22</option>
+      <option value="27|MTN 5GB">MTN 5GB → ₵27</option>
+      <option value="10|Vodafone 1GB">Vodafone 1GB → ₵10</option>
+      <option value="20|Vodafone 2GB">Vodafone 2GB → ₵20</option>
+      <option value="30|Vodafone 3GB">Vodafone 3GB → ₵30</option>
+      <option value="40|Vodafone 4GB">Vodafone 4GB → ₵40</option>
+      <option value="50|Vodafone 5GB">Vodafone 5GB → ₵50</option>
+    </select>
+    <button type="submit">Submit</button>
+  </form>
+
+  <div class="instructions" id="instructionsBox">
+    <h3>Payment Instructions</h3>
+    <p>You selected: <span id="selectedBundle"></span></p>
+    <p>Amount: GHS <span id="selectedAmount"></span></p>
+
+    <p>📱 Please pay to the MoMo number below:</p>
+    <p class="highlight" id="momoNumber">0502376541 (Samuel Coleman)</p>
+    <button onclick="copyMoMo()">Copy Number</button>
+
+    <p>⏳ After payment, you will receive your data within <b>5–25 minutes</b>.</p>
   </div>
 
-  <!-- Vodafone Section -->
-  <div class="network-section voda">
-    <img src="images/vodafone.png" alt="Vodafone Logo" class="vodafone-logo">
-    <h2>Vodafone Data Bundles</h2>
-    <table>
-      <tr><th>Bundle</th><th>Price (₵)</th></tr>
-      <tr><td>1GB</td><td>10</td></tr>
-      <tr><td>2GB</td><td>20</td></tr>
-      <tr><td>3GB</td><td>30</td></tr>
-      <tr><td>4GB</td><td>40</td></tr>
-      <tr><td>5GB</td><td>50</td></tr>
-    </table>
-  </div>
+  <script>
+    const form = document.getElementById("bundleForm");
+    const instructionsBox = document.getElementById("instructionsBox");
+    const selectedBundle = document.getElementById("selectedBundle");
+    const selectedAmount = document.getElementById("selectedAmount");
+    const momoNumber = document.getElementById("momoNumber");
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+      const bundleValue = document.getElementById("bundle").value;
+      if (bundleValue) {
+        const [amount, bundleName] = bundleValue.split("|");
+        selectedBundle.innerText = bundleName;
+        selectedAmount.innerText = amount;
+        instructionsBox.style.display = "block";
+        alert("✅ Please pay to the MoMo number shown. You’ll get your data in 5–25 minutes.");
+      }
+    });
+
+    function copyMoMo() {
+      navigator.clipboard.writeText(momoNumber.innerText);
+      alert("MoMo number copied: " + momoNumber.innerText);
+    }
+  </script>
+
 </body>
+</html>
