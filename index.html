@@ -90,7 +90,7 @@
       priceField.value = prices[bundle] || "";
     }
 
-    function showSummary(event) {
+    function sendToWhatsApp(event) {
       event.preventDefault();
 
       const network = document.getElementById("network").value;
@@ -98,7 +98,14 @@
       const price = document.getElementById("price").value;
       const beneficiary = document.getElementById("beneficiary").value;
 
-      alert(`✅ Order Summary:\n\nNetwork: ${network}\nBundle: ${bundle}\nPrice: GHS ${price}\nBeneficiary: ${beneficiary}\n\nℹ️ After payment, you’ll receive the bundle within 2–25 minutes.\nSend money to 0502376541.\nMTN → Other Networks.\nVodafone → Send Direct.\n📞 Customer Care: 0502376541`);
+      // Create WhatsApp message
+      const message = `📶 New Data Order:%0A%0ANetwork: ${network}%0ABundle: ${bundle}%0APrice: GHS ${price}%0ABeneficiary: ${beneficiary}%0A%0Aℹ️ After payment, bundle will be delivered in 2–25 minutes.%0APlease send money to 0502376541.%0AMTN → Choose Other Networks.%0AVodafone → Send Direct.`;
+
+      // Your WhatsApp number in international format (233 for Ghana)
+      const whatsappNumber = "233502376541";
+
+      // Redirect user to WhatsApp chat with pre-filled message
+      window.open(`https://wa.me/${whatsappNumber}?text=${message}`, "_blank");
     }
   </script>
 </head>
@@ -106,7 +113,7 @@
 
   <h2>📶 Buy Data Bundle</h2>
 
-  <form onsubmit="showSummary(event)">
+  <form onsubmit="sendToWhatsApp(event)">
     
     <label>Network:</label>
     <select id="network" required>
@@ -149,4 +156,4 @@
   </form>
 
 </body>
-  </html>
+</html>
