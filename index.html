@@ -1,59 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Buy Data Bundle</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 40px; background: #f4f4f4; }
-    form { background: #fff; padding: 20px; border-radius: 8px; width: 320px; margin: auto; }
-    label { display: block; margin-top: 10px; }
-    select, input, button { width: 100%; padding: 8px; margin-top: 5px; }
-    button { background: #22c55e; color: white; border: none; margin-top: 15px; cursor: pointer; border-radius: 5px; }
-    button:hover { background: #16a34a; }
-  </style>
-  <script>
-    function updatePrice() {
-      const network = document.querySelector('select[name=\"network\"]').value;
-      const bundle = document.querySelector('select[name=\"bundle\"]').value;
-      let price = '';
-
-      const prices = {
-        MTN: { '1GB': 6, '2GB': 12, '3GB': 15, '4GB': 22, '5GB': 27 },
-        Vodafone: { '1GB': 10, '2GB': 20, '3GB': 30, '4GB': 40, '5GB': 50 }
-      };
-
-      if (prices[network] && prices[network][bundle]) {
-        price = prices[network][bundle];
-      }
-
-      document.querySelector('input[name=\"price\"]').value = price;
-    }
-  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Bundle Prices</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1 style="text-align:center;">Buy Data Bundle</h1>
-  <form action="save_order.php" method="POST">
-    <label>Phone Number:</label>
-    <input type="text" name="number" required>
+  <h1>📶 Data Bundle Prices</h1>
 
-    <label>Network:</label>
-    <select name="network" onchange="updatePrice()">
-      <option value="MTN">MTN</option>
-      <option value="Vodafone">Vodafone</option>
-    </select>
+  <section class="bundles">
+    <h2>MTN Data Bundles</h2>
+    <table class="price-table">
+      <thead><tr><th>Bundle</th><th>Price (₵)</th></tr></thead>
+      <tbody>
+        <tr><td>1GB</td><td>6</td></tr>
+        <tr><td>2GB</td><td>12</td></tr>
+        <tr><td>3GB</td><td>15</td></tr>
+        <tr><td>4GB</td><td>22</td></tr>
+        <tr><td>5GB</td><td>27</td></tr>
+      </tbody>
+    </table>
 
-    <label>Bundle:</label>
-    <select name="bundle" onchange="updatePrice()">
-      <option value="1GB">1GB</option>
-      <option value="2GB">2GB</option>
-      <option value="3GB">3GB</option>
-      <option value="4GB">4GB</option>
-      <option value="5GB">5GB</option>
-    </select>
-
-    <label>Price (₵):</label>
-    <input type="text" name="price" readonly>
-
-    <button type="submit">Submit Order</button>
-  </form>
+    <h2>Vodafone Data Bundles</h2>
+    <table class="price-table">
+      <thead><tr><th>Bundle</th><th>Price (₵)</th></tr></thead>
+      <tbody>
+        <tr><td>1GB</td><td>10</td></tr>
+        <tr><td>2GB</td><td>20</td></tr>
+        <tr><td>3GB</td><td>30</td></tr>
+        <tr><td>4GB</td><td>40</td></tr>
+        <tr><td>5GB</td><td>50</td></tr>
+      </tbody>
+    </table>
+  </section>
 </body>
 </html>
