@@ -1,45 +1,100 @@
+/* Reset some defaults */
 body {
-  font-family: system-ui, Arial, sans-serif;
-  background: #f9fafb;
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
   margin: 0;
-  padding: 20px;
+  padding: 0;
+  color: #333;
 }
 
+/* Container */
+.container {
+  max-width: 600px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Title */
 h1 {
   text-align: center;
-  margin-bottom: 30px;
+  font-size: 28px;
+  margin-bottom: 25px;
+  color: #222;
 }
 
-.bundles {
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 0 16px;
+/* Subtitles */
+h2 {
+  margin-top: 25px;
+  font-size: 22px;
+  color: #444;
+  text-align: center;
 }
 
-.bundles h2 {
-  margin: 24px 0 10px;
-  color: #111827;
-}
-
-.price-table {
+/* Tables */
+table {
   width: 100%;
   border-collapse: collapse;
-  border: 1px solid #e5e7eb;
-  margin-bottom: 30px;
+  margin-top: 12px;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
-.price-table th,
-.price-table td {
+/* Table headers */
+table th, table td {
+  border: 1px solid #ddd;
   padding: 12px;
-  border-top: 1px solid #e5e7eb;
-  text-align: left;
+  text-align: center;
+  font-size: 16px;
 }
 
-.price-table thead th {
-  background: #f3f4f6;
-  font-weight: 600;
+table th {
+  color: #fff;
+  font-weight: bold;
 }
 
-.price-table tbody tr:nth-child(even) {
-  background: #fafafa;
+/* MTN Table */
+.mtn-table th {
+  background-color: #ffcb05; /* MTN yellow */
+  color: #000; /* black text */
+}
+
+.mtn-table tr:nth-child(even) {
+  background-color: #fffbea;
+}
+
+.mtn-table tr:hover {
+  background-color: #fff3c4;
+}
+
+/* Vodafone Table */
+.voda-table th {
+  background-color: #e60000; /* Vodafone red */
+}
+
+.voda-table tr:nth-child(even) {
+  background-color: #ffe5e5;
+}
+
+.voda-table tr:hover {
+  background-color: #ffcccc;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .container {
+    width: 90%;
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  table th, table td {
+    font-size: 14px;
+    padding: 8px;
+  }
 }
