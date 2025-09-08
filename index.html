@@ -1,290 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Cyrus Data Hub — Buy Data</title>
-<style>
-  :root{
-    --bg:#0f172a;        /* slate-900 */
-    --panel:#0b1224;     /* darker panel */
-    --card:#111a32;
-    --accent:#22c55e;    /* green-500 */
-    --accent-2:#60a5fa;  /* blue-400 */
-    --text:#e5e7eb;      /* gray-200 */
-    --muted:#9ca3af;     /* gray-400 */
-    --ring:rgba(96,165,250,.35);
-    --danger:#ef4444;
-  }
-  *{box-sizing:border-box}
-  body{
-    margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
-    background: radial-gradient(1200px 700px at 80% -10%, rgba(96,165,250,.12), transparent 60%),
-                radial-gradient(1000px 600px at -10% 10%, rgba(34,197,94,.10), transparent 55%),
-                var(--bg);
-    color:var(--text);
-  }
-  header{
-    padding:28px 18px; text-align:center;
-  }
-  header h1{
-    margin:0; font-size: clamp(22px, 3.2vw, 36px); letter-spacing:.3px;
-  }
-  header p{margin:.5rem 0 0; color:var(--muted)}
-  .wrap{
-    max-width:1000px; margin:0 auto; padding:0 16px 40px; display:grid; gap:28px;
-    grid-template-columns: 1.1fr .9fr;
-  }
-  @media (max-width: 900px){ .wrap{grid-template-columns:1fr} }
-
-  .panel{
-    background: linear-gradient(180deg, var(--panel), #0a1122);
-    border:1px solid rgba(255,255,255,.06);
-    border-radius:20px; padding:18px; box-shadow: 0 10px 30px rgba(0,0,0,.35);
-  }
-  .panel h2{margin:4px 4px 14px; font-size:18px; color:#dbeafe}
-  .network-toggle{
-    display:flex; gap:10px; margin:10px 6px 18px;
-  }
-  .chip{
-    padding:10px 14px; border-radius:999px; cursor:pointer; user-select:none;
-    background:#0b152f; border:1px solid rgba(255,255,255,.06); color:var(--muted);
-    transition:.18s ease;
-  }
-  .chip.active{ color:#04150a; background:var(--accent); border-color:transparent; font-weight:600 }
-  .chip:hover{ transform:translateY(-1px) }
-
-  .grid{
-    display:grid; gap:12px;
-    grid-template-columns: repeat(2, minmax(0,1fr));
-  }
-  @media (max-width:560px){ .grid{grid-template-columns:1fr} }
-
-  .card{
-    background: linear-gradient(180deg, var(--card), #0e1934);
-    border:1px solid rgba(255,255,255,.06); border-radius:16px; padding:14px 14px 12px;
-    display:flex; align-items:center; justify-content:space-between; gap:8px;
-    cursor:pointer; transition: .18s ease; position:relative; overflow:hidden;
-  }
-  .card:hover{ transform: translateY(-2px); box-shadow: 0 14px 30px rgba(0,0,0,.35) }
-  .card.selected{ outline:2px solid var(--accent-2); box-shadow: 0 0 0 6px var(--ring) inset }
-  .tag{font-size:13px; color:var(--muted)}
-  .gb{font-size:18px; font-weight:700}
-  .price{font-weight:700; letter-spacing:.2px}
-
-  form label{display:block; font-size:14px; color:var(--muted); margin:6px 2px}
-  .input{
-    width:100%; padding:12px 14px; border-radius:12px; background:#0b152f; color:var(--text);
-    border:1px solid rgba(255,255,255,.08); outline:none; transition:.18s ease;
-  }
-  .input:focus{ border-color:#60a5fa; box-shadow:0 0 0 4px var(--ring) }
-  .readonly{opacity:.85}
-
-  .btn{
-    width:100%; padding:14px 16px; border-radius:14px; border:none; cursor:pointer; font-weight:700;
-    background:linear-gradient(90deg, #22c55e, #16a34a); color:#04150a; letter-spacing:.2px;
-    transition:.18s ease; margin-top:12px;
-  }
-  .btn:hover{ transform: translateY(-1px) }
-  .btn:disabled{ opacity:.5; cursor:not-allowed; transform:none }
-
-  .note{
-    margin:10px 2px 0; font-size:13px; color:var(--muted)
-  }
-  .success,.error{
-    margin-top:12px; padding:12px 14px; border-radius:12px; font-weight:600;
-  }
-  .success{ background:rgba(34,197,94,.12); border:1px solid rgba(34,197,94,.35); color:#bbf7d0 }
-  .error{ background:rgba(239,68,68,.12); border:1px solid rgba(239,68,68,.35); color:#fecaca }
-  .footer{ text-align:center; color:var(--muted); font-size:12px; margin-top:10px }
-</style>
-</head>
-<body>
-  <header>
-    <h1>📱 Cyrus Data Hub</h1>
-    <p>Fast, affordable data bundles delivered to your number</p>
-  </header>
-
-  <div class="wrap">
-    <!-- Left: Bundles -->
-    <section class="panel" id="bundlesPanel">
-      <h2>Choose Your Network</h2>
-      <div class="network-toggle" role="tablist" aria-label="Network selector">
-        <div class="chip active" data-network="MTN" role="tab" aria-selected="true">MTN</div>
-        <div class="chip" data-network="Vodafone" role="tab" aria-selected="false">Vodafone</div>
-      </div>
-
-      <!-- MTN grid -->
-      <div class="grid" id="grid-MTN" aria-live="polite">
-        <!-- size, price are in data-* so JS can read them -->
-        <div class="card" data-network="MTN" data-size="1GB" data-price="6">
-          <div>
-            <div class="gb">MTN — 1GB</div>
-            <div class="tag">Everyday bundle</div>
-          </div>
-          <div class="price">₵6</div>
-        </div>
-        <div class="card" data-network="MTN" data-size="2GB" data-price="12">
-          <div><div class="gb">MTN — 2GB</div><div class="tag">Best value</div></div><div class="price">₵12</div>
-        </div>
-        <div class="card" data-network="MTN" data-size="3GB" data-price="15">
-          <div><div class="gb">MTN — 3GB</div><div class="tag">Popular</div></div><div class="price">₵15</div>
-        </div>
-        <div class="card" data-network="MTN" data-size="4GB" data-price="22">
-          <div><div class="gb">MTN — 4GB</div><div class="tag">Heavy user</div></div><div class="price">₵22</div>
-        </div>
-        <div class="card" data-network="MTN" data-size="5GB" data-price="27">
-          <div><div class="gb">MTN — 5GB</div><div class="tag">Power pack</div></div><div class="price">₵27</div>
-        </div>
-      </div>
-
-      <!-- Vodafone grid -->
-      <div class="grid" id="grid-Vodafone" style="display:none" aria-live="polite">
-        <div class="card" data-network="Vodafone" data-size="1GB" data-price="10">
-          <div><div class="gb">Vodafone — 1GB</div><div class="tag">Everyday bundle</div></div><div class="price">₵10</div>
-        </div>
-        <div class="card" data-network="Vodafone" data-size="2GB" data-price="20">
-          <div><div class="gb">Vodafone — 2GB</div><div class="tag">Best value</div></div><div class="price">₵20</div>
-        </div>
-        <div class="card" data-network="Vodafone" data-size="3GB" data-price="30">
-          <div><div class="gb">Vodafone — 3GB</div><div class="tag">Popular</div></div><div class="price">₵30</div>
-        </div>
-        <div class="card" data-network="Vodafone" data-size="4GB" data-price="40">
-          <div><div class="gb">Vodafone — 4GB</div><div class="tag">Heavy user</div></div><div class="price">₵40</div>
-        </div>
-        <div class="card" data-network="Vodafone" data-size="5GB" data-price="50">
-          <div><div class="gb">Vodafone — 5GB</div><div class="tag">Power pack</div></div><div class="price">₵50</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Right: Order form -->
-    <section class="panel">
-      <h2>Complete Order</h2>
-      <form id="orderForm" novalidate>
-        <label>Selected Network</label>
-        <input class="input readonly" id="fieldNetwork" type="text" readonly placeholder="Pick a bundle on the left">
-
-        <label>Selected Bundle</label>
-        <input class="input readonly" id="fieldBundle" type="text" readonly placeholder="e.g. 2GB">
-
-        <label>Price (GHS)</label>
-        <input class="input readonly" id="fieldPrice" type="text" readonly placeholder="—">
-
-        <label for="number">Beneficiary Number</label>
-        <input class="input" id="number" name="number" inputmode="numeric" autocomplete="tel"
-               placeholder="e.g. 0241234567" required maxlength="10">
-
-        <p class="note">After payment is confirmed, you will receive your bundle within <strong>2–25 minutes</strong>.</p>
-
-        <button id="submitBtn" class="btn" type="submit" disabled>Submit Order</button>
-
-        <div id="msg" aria-live="polite"></div>
-      </form>
-
-      <div class="footer">By ordering, you agree to our service terms.</div>
-    </section>
-  </div>
-
-  <!-- EmailJS SDK -->
-  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Bundle Purchase</title>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <script>
-    // ----- State -----
-    let selected = { network: "MTN", size: null, price: null };
+    (function(){
+      emailjs.init("TKb19tHfl7LLxmPPCQ0XxxUEQ8pBK9OJ6B"); // ✅ Public Key
+    })();
 
-    // ----- EmailJS Init -----
-    (function(){ emailjs.init("k7Y1IyxlSt1I2i_IiID"); })(); // PUBLIC KEY
+    function updatePrice() {
+      const bundle = document.getElementById("bundle").value;
+      const priceField = document.getElementById("price");
 
-    // ----- Helpers -----
-    const qs = (s, el=document) => el.querySelector(s);
-    const qsa = (s, el=document) => Array.from(el.querySelectorAll(s));
-    const showGrid = (name) => {
-      qs("#grid-MTN").style.display = name === "MTN" ? "" : "none";
-      qs("#grid-Vodafone").style.display = name === "Vodafone" ? "" : "none";
-    };
-    const updateForm = () => {
-      qs("#fieldNetwork").value = selected.network || "";
-      qs("#fieldBundle").value = selected.size ? `${selected.size}` : "";
-      qs("#fieldPrice").value = selected.price != null ? `${selected.price}` : "";
-      validateReady();
-    };
-    const validateReady = () => {
-      const ready = !!(selected.network && selected.size && selected.price && qs("#number").value.trim().length >= 9);
-      qs("#submitBtn").disabled = !ready;
-    };
-    const clearCardsSelection = (scope) => {
-      qsa(".card", scope).forEach(c => c.classList.remove("selected"));
-    };
-
-    // ----- Network toggle -----
-    qsa(".chip").forEach(chip => {
-      chip.addEventListener("click", () => {
-        qsa(".chip").forEach(c => c.classList.remove("active"));
-        chip.classList.add("active");
-        selected = { network: chip.dataset.network, size: null, price: null };
-        showGrid(selected.network);
-        // clear selection highlight
-        clearCardsSelection(document);
-        updateForm();
-      });
-    });
-
-    // ----- Card select -----
-    qsa(".grid").forEach(grid => {
-      grid.addEventListener("click", (e) => {
-        const card = e.target.closest(".card");
-        if(!card) return;
-        // Only allow selecting visible network grid
-        const n = card.dataset.network;
-        if(n !== selected.network) return;
-
-        clearCardsSelection(grid);
-        card.classList.add("selected");
-
-        selected.size  = card.dataset.size;
-        selected.price = card.dataset.price;
-        updateForm();
-      });
-    });
-
-    // ----- Number input validation -----
-    qs("#number").addEventListener("input", (e) => {
-      // keep digits only
-      e.target.value = e.target.value.replace(/\D+/g, "").slice(0, 10);
-      validateReady();
-    });
-
-    // ----- Submit -----
-    qs("#orderForm").addEventListener("submit", async (e) => {
-      e.preventDefault();
-      qs("#msg").innerHTML = "";
-      qs("#submitBtn").disabled = true;
-
-      // Prepare payload for EmailJS (bundle combines network + size)
-      const params = {
-        bundle: `${selected.network} — ${selected.size}`,
-        price: selected.price,
-        number: qs("#number").value.trim()
+      const prices = {
+        "MTN-1GB": 6,
+        "MTN-2GB": 12,
+        "MTN-3GB": 15,
+        "MTN-4GB": 22,
+        "MTN-5GB": 27,
+        "Vodafone-1GB": 10,
+        "Vodafone-2GB": 20,
+        "Vodafone-3GB": 30,
+        "Vodafone-4GB": 40,
+        "Vodafone-5GB": 50
       };
 
-      try {
-        await emailjs.send("service_c75kumu", "template_tpuxgf5", params);
-        qs("#msg").innerHTML =
-          `<div class="success">✅ Order submitted! You will receive your bundle within <strong>2–25 minutes</strong>.</div>`;
-        // Optionally reset number only
-        // qs("#orderForm").reset(); 
-      } catch (err) {
-        console.error(err);
-        qs("#msg").innerHTML =
-          `<div class="error">❌ Failed to send. Please check your connection and try again.</div>`;
-        qs("#submitBtn").disabled = false;
-        return;
-      }
-    });
+      priceField.value = prices[bundle] || "";
+    }
 
-    // Init UI
-    showGrid("MTN");
-    updateForm();
+    function sendOrder(event) {
+      event.preventDefault();
+
+      const params = {
+        network: document.getElementById("network").value,
+        bundle: document.getElementById("bundle").value,
+        price: document.getElementById("price").value,
+        beneficiary: document.getElementById("beneficiary").value
+      };
+
+      emailjs.send("service_ww53syt", "template_tpuxgf5", params)
+      .then(() => {
+        alert("✅ Order sent successfully! You will receive your bundle within 2–25 minutes.");
+      }, (error) => {
+        console.error("Failed...", error);
+        alert("❌ Failed to send. Please check your connection and try again.");
+      });
+    }
   </script>
+</head>
+<body style="font-family: Arial, sans-serif; background:#f5f5f5; padding:20px;">
+
+  <h2>📶 Buy Data Bundle</h2>
+
+  <form onsubmit="sendOrder(event)" style="background:#fff; padding:20px; border-radius:10px; max-width:400px;">
+    
+    <label>Network:</label><br>
+    <select id="network" required>
+      <option value="MTN">MTN</option>
+      <option value="Vodafone">Vodafone</option>
+    </select><br><br>
+
+    <label>Bundle:</label><br>
+    <select id="bundle" required onchange="updatePrice()">
+      <optgroup label="MTN">
+        <option value="MTN-1GB">1GB</option>
+        <option value="MTN-2GB">2GB</option>
+        <option value="MTN-3GB">3GB</option>
+        <option value="MTN-4GB">4GB</option>
+        <option value="MTN-5GB">5GB</option>
+      </optgroup>
+      <optgroup label="Vodafone">
+        <option value="Vodafone-1GB">1GB</option>
+        <option value="Vodafone-2GB">2GB</option>
+        <option value="Vodafone-3GB">3GB</option>
+        <option value="Vodafone-4GB">4GB</option>
+        <option value="Vodafone-5GB">5GB</option>
+      </optgroup>
+    </select><br><br>
+
+    <label>Price (GHS):</label><br>
+    <input type="text" id="price" readonly><br><br>
+
+    <label>Beneficiary Number:</label><br>
+    <input type="text" id="beneficiary" required><br><br>
+
+    <p><b>ℹ️ Note:</b> After payment is confirmed, you will receive your bundle within 2–25 minutes.<br>
+    Dial *170# and send money to <b>0502376541</b>.  
+    MTN → choose <b>Other Networks</b>. Vodafone → send directly. <br>
+    📞 Customer Care: <b>0502376541</b></p>
+
+    <button type="submit" style="padding:10px 20px; background:green; color:white; border:none; border-radius:5px;">Submit Order</button>
+  </form>
+
 </body>
-  </html>
+</html>
