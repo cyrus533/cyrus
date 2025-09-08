@@ -39,38 +39,33 @@ h1 {
   width: 100px;
   height: auto;
   margin-bottom: 10px;
+  border-radius: 10px;
 }
 
 /* MTN Theme */
 .mtn {
-  background: #ffcc00;
+  background: #fff8d6;
   color: #000;
+  border: 2px solid #ffcc00;
   box-shadow: 0 4px 12px rgba(255, 204, 0, 0.4);
 }
 
 .mtn th {
-  background: #ffe066;
+  background: #ffcc00;
   color: #000;
-}
-
-.mtn td {
-  border-top: 1px solid #00000030;
 }
 
 /* Vodafone Theme */
 .voda {
-  background: #e60000;
-  color: #fff;
+  background: #ffe6e6;
+  color: #000;
+  border: 2px solid #e60000;
   box-shadow: 0 4px 12px rgba(230, 0, 0, 0.4);
 }
 
 .voda th {
-  background: #ff3333;
+  background: #e60000;
   color: #fff;
-}
-
-.voda td {
-  border-top: 1px solid #ffffff40;
 }
 
 /* Tables */
@@ -83,4 +78,10 @@ table {
 th, td {
   padding: 12px;
   font-size: 16px;
-  }
+  text-align: center;
+}
+
+/* Zebra stripes */
+tr:nth-child(even) td {
+  background: rgba(0,0,0,0.05);
+}
