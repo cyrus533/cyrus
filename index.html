@@ -1,1 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Bundle Purchase</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      padding: 20px;
+      margin: 0;
+    }
 
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    form {
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      max-width: 420px;
+      margin: 20px auto;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 10px;
+      margin-bottom: 5px;
+      color: #444;
+    }
+
+    select, input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: green;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: darkgreen;
+    }
+
+    p.note {
+      background: #f9f9f9;
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 14px;
+      color: #333;
+      line-height: 1.5;
+      border: 1px solid #ddd;
+    }
+  </style>
+
+  <script>
+    function updatePrice() {
+      const bundle = document.getElementById("bundle").value;
+      const priceField = document.getElementById("price");
+
+      const prices = {
+        "MTN-1GB": 6,
+        "MTN-2GB": 12,
+        "MTN-3GB": 15,
+        "MTN-4GB": 22,
+        "MTN-5GB": 27,
+        "Vodafone-1GB": 10,
+        "Vodafone-2GB": 20,
+        "Vodafone-3GB": 30,
+        "Vodafone-4GB": 40,
+        "Vodafone-5GB": 50
+      };
+
+      priceField.value = prices[bundle] || "";
+    }
+
+    function showSummary(event) {
+      event.preventDefault();
+
+      const network = document.getElementById("network").value;
+      const bundle = document.getElementById("bundle").value;
+      const price = document.getElementById("price").value;
+      const beneficiary = document.getElementById("beneficiary").value;
+
+      alert(`✅ Order Summary:\n\nNetwork: ${network}\nBundle: ${bundle}\nPrice: GHS ${price}\nBeneficiary: ${beneficiary}\n\nℹ️ After payment, you’ll receive the bundle within 2–25 minutes.\nSend money to 0502376541.\nMTN → Other Networks.\nVodafone → Send Direct.\n📞 Customer Care: 0502376541`);
+    }
+  </script>
+</head>
+<body>
+
+  <h2>📶 Buy Data Bundle</h2>
+
+  <form onsubmit="showSummary(event)">
+    
+    <label>Network:</label>
+    <select id="network" required>
+      <option value="MTN">MTN</option>
+      <option value="Vodafone">Vodafone</option>
+    </select>
+
+    <label>Bundle:</label>
+    <select id="bundle" required onchange="updatePrice()">
+      <optgroup label="MTN">
+        <option value="MTN-1GB">1GB</option>
+        <option value="MTN-2GB">2GB</option>
+        <option value="MTN-3GB">3GB</option>
+        <option value="MTN-4GB">4GB</option>
+        <option value="MTN-5GB">5GB</option>
+      </optgroup>
+      <optgroup label="Vodafone">
+        <option value="Vodafone-1GB">1GB</option>
+        <option value="Vodafone-2GB">2GB</option>
+        <option value="Vodafone-3GB">3GB</option>
+        <option value="Vodafone-4GB">4GB</option>
+        <option value="Vodafone-5GB">5GB</option>
+      </optgroup>
+    </select>
+
+    <label>Price (GHS):</label>
+    <input type="text" id="price" readonly>
+
+    <label>Beneficiary Number:</label>
+    <input type="text" id="beneficiary" placeholder="Enter number e.g. 0591234567" required>
+
+    <p class="note">
+      ℹ️ After payment is confirmed, you will receive your bundle within <b>2–25 minutes</b>.<br><br>
+      Dial <b>*170#</b> and send money to <b>0502376541</b>.<br>
+      MTN → choose <b>Other Networks</b>. Vodafone → send directly.<br><br>
+      📞 Customer Care: <b>0502376541</b>
+    </p>
+
+    <button type="submit">Submit Order</button>
+  </form>
+
+</body>
+  </html>
