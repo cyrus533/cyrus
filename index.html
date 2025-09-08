@@ -1,69 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cyrus Data Hub</title>
+  <title>Buy Data Bundle</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 40px; background: #f4f4f4; }
+    form { background: #fff; padding: 20px; border-radius: 8px; width: 320px; margin: auto; }
+    label { display: block; margin-top: 10px; }
+    select, input, button { width: 100%; padding: 8px; margin-top: 5px; }
+    button { background: #22c55e; color: white; border: none; margin-top: 15px; cursor: pointer; border-radius: 5px; }
+    button:hover { background: #16a34a; }
+  </style>
+  <script>
+    function updatePrice() {
+      const network = document.querySelector('select[name=\"network\"]').value;
+      const bundle = document.querySelector('select[name=\"bundle\"]').value;
+      let price = '';
 
-  <!-- Link to external CSS -->
-  <link rel="stylesheet" href="style.css">
+      const prices = {
+        MTN: { '1GB': 6, '2GB': 12, '3GB': 15, '4GB': 22, '5GB': 27 },
+        Vodafone: { '1GB': 10, '2GB': 20, '3GB': 30, '4GB': 40, '5GB': 50 }
+      };
 
-  <!-- EmailJS -->
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
-  <script type="text/javascript">
-    (function() {
-      emailjs.init("k7Y1IyxlSt1I2i_Ii"); // Your Public Key
-    })();
+      if (prices[network] && prices[network][bundle]) {
+        price = prices[network][bundle];
+      }
+
+      document.querySelector('input[name=\"price\"]').value = price;
+    }
   </script>
 </head>
 <body>
-  <div class="container">
-    <h1>Cyrus Data Hub</h1>
+  <h1 style="text-align:center;">Buy Data Bundle</h1>
+  <form action="save_order.php" method="POST">
+    <label>Phone Number:</label>
+    <input type="text" name="number" required>
 
-    <!-- Payment Instructions -->
-    <div class="payment-info">
-      <p>📌 Please send payment to <strong>0502376541</strong></p>
-      <p>👉 If you are using <strong>MTN</strong>, select <strong>Telecel</strong> under other networks.</p>
-    </div>
+    <label>Network:</label>
+    <select name="network" onchange="updatePrice()">
+      <option value="MTN">MTN</option>
+      <option value="Vodafone">Vodafone</option>
+    </select>
 
-    <!-- Order Form -->
-    <form id="orderForm">
-      <label>Beneficiary Number</label>
-      <input type="text" name="beneficiary_number" placeholder="Number to receive data" required>
+    <label>Bundle:</label>
+    <select name="bundle" onchange="updatePrice()">
+      <option value="1GB">1GB</option>
+      <option value="2GB">2GB</option>
+      <option value="3GB">3GB</option>
+      <option value="4GB">4GB</option>
+      <option value="5GB">5GB</option>
+    </select>
 
-      <label>Your Phone Number</label>
-      <input type="text" name="phone" placeholder="Your phone number" required>
+    <label>Price (₵):</label>
+    <input type="text" name="price" readonly>
 
-      <label>Bundle Size</label>
-      <select name="bundle" required>
-        <option value="1GB - GHS 6">1GB - GHS 6</option>
-        <option value="3GB - GHS 12">3GB - GHS 12</option>
-        <option value="6GB - GHS 22">6GB - GHS 22</option>
-        <option value="1.5GB - GHS 7">1.5GB - GHS 7</option>
-        <option value="3GB - GHS 12 (Voda)">3GB - GHS 12 (Voda)</option>
-        <option value="6GB - GHS 22 (Voda)">6GB - GHS 22 (Voda)</option>
-      </select>
-
-      <label>Amount</label>
-      <input type="text" name="amount" placeholder="Enter amount paid" required>
-
-      <button type="submit">Submit Order</button>
-    </form>
-  </div>
-
-  <script>
-    // Form submission
-    document.getElementById("orderForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-
-      emailjs.sendForm("service_hc2vxxp", "template_5hl2jaf", this)
-        .then(() => {
-          alert("✅ Order sent successfully!\n\n📌 Please send payment to 0502376541.\n👉 If you are using MTN, select Telecel under other networks.");
-        }, (error) => {
-          alert("❌ Failed to send order. Please try again.");
-          console.error(error);
-        });
-    });
-  </script>
+    <button type="submit">Submit Order</button>
+  </form>
 </body>
 </html>
