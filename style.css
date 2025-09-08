@@ -1,7 +1,7 @@
-/* Reset some defaults */
+/* General styles */
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f8f9fa;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background-color: #f4f6f9;
   margin: 0;
   padding: 0;
   color: #333;
@@ -9,28 +9,43 @@ body {
 
 /* Container */
 .container {
-  max-width: 600px;
+  max-width: 800px;
   margin: 40px auto;
   background: #fff;
   padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* Title */
+/* Main Title */
 h1 {
   text-align: center;
-  font-size: 28px;
-  margin-bottom: 25px;
+  font-size: 32px;
+  margin-bottom: 30px;
   color: #222;
 }
 
-/* Subtitles */
+/* Network section */
+.network-section {
+  margin-bottom: 40px;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Logos */
+.logo {
+  width: 120px;
+  margin: 10px auto 5px;
+  display: block;
+  border-radius: 10px;
+}
+
 h2 {
-  margin-top: 25px;
-  font-size: 22px;
-  color: #444;
   text-align: center;
+  margin: 15px 0;
+  font-size: 22px;
+  font-weight: bold;
 }
 
 /* Tables */
@@ -42,59 +57,7 @@ table {
   overflow: hidden;
 }
 
-/* Table headers */
 table th, table td {
-  border: 1px solid #ddd;
-  padding: 12px;
+  padding: 14px;
   text-align: center;
-  font-size: 16px;
-}
-
-table th {
-  color: #fff;
-  font-weight: bold;
-}
-
-/* MTN Table */
-.mtn-table th {
-  background-color: #ffcb05; /* MTN yellow */
-  color: #000; /* black text */
-}
-
-.mtn-table tr:nth-child(even) {
-  background-color: #fffbea;
-}
-
-.mtn-table tr:hover {
-  background-color: #fff3c4;
-}
-
-/* Vodafone Table */
-.voda-table th {
-  background-color: #e60000; /* Vodafone red */
-}
-
-.voda-table tr:nth-child(even) {
-  background-color: #ffe5e5;
-}
-
-.voda-table tr:hover {
-  background-color: #ffcccc;
-}
-
-/* Responsive */
-@media (max-width: 600px) {
-  .container {
-    width: 90%;
-    padding: 15px;
-  }
-
-  h1 {
-    font-size: 24px;
-  }
-
-  table th, table td {
-    font-size: 14px;
-    padding: 8px;
-  }
-}
+  font-size:
