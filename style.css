@@ -85,3 +85,16 @@ th, td {
 tr:nth-child(even) td {
   background: rgba(0,0,0,0.05);
 }
+.logo {
+  display: block;
+  margin: 10px auto;    /* centers the image */
+  width: 120px;         /* set size */
+  height: auto;         /* keeps proportions */
+  border-radius: 12px;  /* smooth rounded corners */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2); /* soft shadow */
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.05); /* zoom in when hovered */
+  }
