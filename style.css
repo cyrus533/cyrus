@@ -98,3 +98,18 @@ tr:nth-child(even) td {
 .logo:hover {
   transform: scale(1.05); /* zoom in when hovered */
   }
+.vodafone-logo {
+  display: block;
+  margin: 10px auto;          /* center */
+  width: 120px;               /* size */
+  height: auto;               /* keep ratio */
+  border-radius: 50%;         /* circle style */
+  border: 3px solid #e60000;  /* Vodafone red border */
+  box-shadow: 0 4px 12px rgba(230,0,0,0.4); /* red shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.vodafone-logo:hover {
+  transform: scale(1.08);     /* zoom in a bit */
+  box-shadow: 0 6px 18px rgba(230,0,0,0.6); /* stronger glow */
+  }
