@@ -1,0 +1,100 @@
+<?php
+$servername = "localhost";   // change if needed
+$username   = "your_db_username";
+$password   = "your_db_password";
+$dbname     = "bundles_db";
+
+// connect db
+$conn = new mysqli($servername, $username, $password, $dbname);
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
+
+$number  = $_POST['number'];
+$network = $_POST['network'];
+$bundle  = $_POST['bundle'];
+$price   = $_POST['price'];
+
+// save order
+$sql = "INSERT INTO orders (customer_number, network, bundle, price)
+        VALUES ('$number', '$network', '$bundle', '$price')";
+
+if ($conn->query($sql) === TRUE) {
+  // ---- EMAIL ALERT ----
+  $to      = "your_email@example.com";  // put your email here
+  $subject = "New Data Bundle Order";
+  $message = "New order received:\n\nPhone: $number\nNetwork: $network\nBundle: $bundle\nPrice: ₵$price";
+  $headers = "From: noreply@yourdomain.com";
+  @mail($to, $subject, $message, $headers);
+
+  // ---- SUCCESS PAGE ----
+  echo "
+  <html>
+  <head>
+    <title>Order Received</title>
+    <meta http-equiv='refresh' content='12;url=order.html'>
+  </head>
+  <body style='font-family: Arial; text-align:center; margin-top:50px;'>
+    <h2>✅ Order Received!</h2>
+    <p>Thank you. Your <b>$bundle</b> ($network) bundle has been recorded.</p>
+    <p>You will receive your data within <b>5 – 25 minutes</b>.</p>
+    <p>Total Paid: <b>₵$price</b></p>
+    <br>
+    <p><i>You will be redirected back to the order page in 12 seconds...</i></p>
+    <a href='order.html'>← Back to Home</a>
+  </body>
+  </html>";
+} else {
+  echo "Error: " . $conn->error;
+}
+$conn->close();
+?><?php
+$servername = "localhost";
+$username   = "your_db_username";
+$password   = "your_db_password";
+$dbname     = "bundles_db";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
+
+$result = $conn->query("SELECT * FROM orders ORDER BY created_at DESC");
+?>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Orders Dashboard</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 30px; background: #f4f4f4; }
+    table { width: 100%; border-collapse: collapse; background: #fff; }
+    th, td { border: 1px solid #ddd; padding: 10px; text-align: center; }
+    th { background: #22c55e; color: white; }
+    tr:nth-child(even) { background: #f9f9f9; }
+  </style>
+</head>
+<body>
+  <h1>📋 Customer Orders</h1>
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Phone Number</th>
+      <th>Network</th>
+      <th>Bundle</th>
+      <th>Price (₵)</th>
+      <th>Date</th>
+    </tr>
+    <?php while($row = $result->fetch_assoc()): ?>
+    <tr>
+      <td><?= $row['id'] ?></td>
+      <td><?= $row['customer_number'] ?></td>
+      <td><?= $row['network'] ?></td>
+      <td><?= $row['bundle'] ?></td>
+      <td><?= $row['price'] ?></td>
+      <td><?= $row['created_at'] ?></td>
+    </tr>
+    <?php endwhile; ?>
+  </table>
+</body>
+</html>
+<?php $conn->close(); ?>
